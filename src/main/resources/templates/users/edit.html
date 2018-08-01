@@ -5,7 +5,9 @@
 	<div class="col-xs-12 col-md-12 text-center">
 		<h4>Editar Usuário</h4>
 		
-		<form th:action="@{/users/}" th:object="${user}" th:method="post">
+		<form th:action="@{/users/edit/{id}(id = ${user.id})}" th:object="${user}" th:method="put">
+		
+			<input type="hidden" th:field="*{id}" />
 			
 			<div class="row">
 				<div class="form-group col-md-6 col-xs-12">
@@ -29,11 +31,10 @@
 			</div>
 			
 			<div class="form-group">
-				<div class="custom-control custom-checkbox">
+				<label class="custom-control custom-checkbox">
 					<input type="checkbox" th:field="*{active}" class="custom-control-input" />
-					<span class="custom-control-indicator"></span>
-					<span class="custom-control-description">Ativo?</span>
-				</div>
+					<span class="custom-control-label" for="customCheck1">Ativo?</span>
+				</label>
 			</div>
 			
 			<div class="form-group">

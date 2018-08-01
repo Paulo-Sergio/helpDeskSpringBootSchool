@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.paulofranca.Helpdesk.model.Role;
-import br.com.paulofranca.Helpdesk.repository.RolesRepository;
+import br.com.paulofranca.Helpdesk.repository.RoleRepository;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired
-	private RolesRepository repository;
+	private RoleRepository repository;
 
 	@Override
 	public List<Role> findAll() {
