@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()
 				.formLogin()
 			.loginPage("/login")
-				.failureUrl("/login?erros=true")
+				.failureUrl("/login?errors=true")
 				.defaultSuccessUrl("/")
 				.usernameParameter("email")
 				.passwordParameter("password")

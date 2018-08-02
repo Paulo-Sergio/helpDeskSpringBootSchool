@@ -31,9 +31,20 @@
 			</div>
 			
 			<div class="form-group">
+				<select th:field="*{roles}" class="custom-select">
+					<option th:each="role : ${roles}" 
+						th:value="${role.id}" 
+						th:text="${role.name}"
+						th:selected="${role.id == user.roles[0].id}">
+					</option>
+				</select>
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+			</div>
+			
+			<div class="form-group">
 				<label class="custom-control custom-checkbox">
 					<input type="checkbox" th:field="*{active}" class="custom-control-input" />
-					<span class="custom-control-label" for="customCheck1">Ativo?</span>
+					<span class="custom-control-label">Ativo?</span>
 				</label>
 			</div>
 			

@@ -7,8 +7,8 @@
 	</div>
 
 	<div class="col-xs-12 col-md-12">
+		<h5 class="mt-4 mb-4">Listagem de Usuários</h5>
 		<table class="table table-bordered">
-			<h5 class="mt-4 mb-4">Listagem de Usuários</h5>
 			<thead>
 				<tr>
 					<th>Nome</th>
@@ -23,9 +23,13 @@
 					<td th:text="${user.name}"></td>
 					<td th:text="${user.lastName}"></td>
 					<td th:text="${user.email}"></td>
-					<td th:text="${user.active}"></td>
+					<td th:switch="${user.active}">
+						<span th:case="${true}" class="badge badge-success" th:text="${user.active}"></span>
+						<span th:case="${false}" class="badge badge-warning" th:text="${user.active}"></span>
+					</td>
 					<td>
-						<form th:action="@{/users/{id}(id = ${user.id})}" th:method="delete">
+						<a th:href="@{/users/edit/{id}(id = ${user.id})}" class="btn btn-info inline">Editar</a>
+						<form th:action="@{/users/{id}(id = ${user.id})}" th:method="delete" class="inline">
 							<button class="btn btn-danger">Excluir</button>
 						</form>
 					</td>
