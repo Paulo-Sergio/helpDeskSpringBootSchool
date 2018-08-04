@@ -33,7 +33,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public List<Ticket> findAll() {
-		return null;
+		return (List<Ticket>) this.repository.findAll();
 	}
 
 	@Override

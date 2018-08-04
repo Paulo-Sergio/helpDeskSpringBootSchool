@@ -22,6 +22,13 @@ public class TicketController {
 	private TicketService ticketService;
 
 	@GetMapping
+	public String index(Model model) {
+		model.addAttribute("list", this.ticketService.findAll());
+		
+		return "ticket/index";
+	}
+	
+	@GetMapping("/new")
 	public String create(Model model) {
 		model = this.ticketService.createTemplate(model);
 
