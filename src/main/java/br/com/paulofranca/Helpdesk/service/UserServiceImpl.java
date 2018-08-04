@@ -38,8 +38,7 @@ public class UserServiceImpl implements UserService {
 		// buscando a role padãro USER
 		Role userRole = this.roleRepository.findByName("USER");
 
-		// setando as roles do usuário (criação de usuario só vai "USER" por
-		// padrão)
+		// setando roles do usuário (criação de user só vai "USER" por padrão)
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
 		return this.repository.save(user);
@@ -87,8 +86,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findAllWhereRoleEquals(Long role_id) {
-		return this.repository.findAllWhereRoleEquals(role_id);
+	public List<User> findAllWhereRoleEquals(Long role_id, Long user_id) {
+		return this.repository.findAllWhereRoleEquals(role_id, user_id);
 	}
 
 	private User findById(Long id) {

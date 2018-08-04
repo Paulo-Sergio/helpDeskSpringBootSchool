@@ -26,7 +26,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(unique = true)
 	@NotEmpty(message = "Não pode ser vazio")
 	@Email(message = "Este e-mail não é válido")
 	private String email;

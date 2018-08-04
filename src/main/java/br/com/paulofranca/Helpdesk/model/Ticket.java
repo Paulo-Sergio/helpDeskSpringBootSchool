@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -32,16 +33,13 @@ public class Ticket {
 	private String description;
 
 	@Column
-	@NotEmpty(message = "Não pode ser vazio")
 	private Date created;
 
 	@Column
-	@NotEmpty(message = "Não pode ser vazio")
 	private Date closed;
 
 	@Column
-	@NotEmpty(message = "Não pode ser vazio")
-	private Boolean finished;
+	private Boolean finished = false;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -52,6 +50,11 @@ public class Ticket {
 	@JoinColumn(name = "technician_id")
 	@JsonBackReference
 	private User technician;
+	
+	@PrePersist
+	public void prePersist() {
+		this.setCreated(new Date());
+	}
 
 	public Ticket() {
 		// TODO Auto-generated constructor stub
