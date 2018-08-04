@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://thymeleaf.org/"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout/"
+	layout:decorator="layout">
+
+<th:block layout:fragment="content">
+	<div class="col-xs-12 col-md-12">			
+		<div class="card">
+			<div class="card-header">
+				Ticket - <strong><span th:text="${ticket.name}"></span></strong>
+			</div>
+			<div class="card-body">
+				<ul>
+					<li>
+						Nome: 
+						<span th:text="${ticket.name}"></span>
+					</li>
+					<li>
+						Descrição: 
+						<span th:text="${ticket.description}"></span>
+					</li>
+					<li>
+						Criado em: 
+						<span th:text="${#dates.format(ticket.created, 'dd/MM/yyyy HH:mm')}"></span>
+					</li>
+					<li>
+						Criado por: 
+						<span th:text="${ticket.userOpen.email}"></span>
+					</li>
+					<li>
+						Técnico atribuido: 
+						<span th:text="${ticket.technician.email}"></span>
+					</li>
+					<li>
+						Finalizado:
+						<div class="inline" th:switch="${ticket.finished}">
+							<span th:case="${true}" class="badge badge-success" th:text="${ticket.finished}"></span>
+							<span th:case="${false}" class="badge badge-danger" th:text="${ticket.finished}"></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>	
+		<form action="" th:action="@{/tickets/}" th:object="${ticket}" th:method="post">
+		</form>
+		
+		<a href="/tickets" class="btn btn-default">Voltar</a>
+	</div>
+</th:block>
+	
+</html>

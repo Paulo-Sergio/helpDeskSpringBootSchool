@@ -18,7 +18,7 @@ import br.com.paulofranca.Helpdesk.repository.UserRepository;
 public class TicketServiceImpl implements TicketService {
 
 	@Autowired
-	private TicketRepository repository;
+	private TicketRepository ticketRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -33,14 +33,14 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public List<Ticket> findAll() {
-		return (List<Ticket>) this.repository.findAll();
+		return (List<Ticket>) this.ticketRepository.findAll();
 	}
 
 	@Override
 	public Ticket create(Ticket ticket) {
 		ticket.setUserOpen(this.getUserLogged());
 
-		return this.repository.save(ticket);
+		return this.ticketRepository.save(ticket);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Ticket show(Long id) {
-		return null;
+		return this.ticketRepository.findOne(id);
 	}
 
 	@Override
