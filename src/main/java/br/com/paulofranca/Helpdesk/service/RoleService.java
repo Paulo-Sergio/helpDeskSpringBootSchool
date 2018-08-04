@@ -12,4 +12,6 @@ public interface RoleService {
 
 	public Boolean delete(Long id);
 	
+	public Role findByName(String name);
+	
 }

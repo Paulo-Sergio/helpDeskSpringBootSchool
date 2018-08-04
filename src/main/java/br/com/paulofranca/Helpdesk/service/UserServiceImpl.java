@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository repository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
 
@@ -38,7 +38,8 @@ public class UserServiceImpl implements UserService {
 		// buscando a role padãro USER
 		Role userRole = this.roleRepository.findByName("USER");
 
-		// setando as roles do usuário (criação de usuario só vai "USER" por padrão)
+		// setando as roles do usuário (criação de usuario só vai "USER" por
+		// padrão)
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
 		return this.repository.save(user);
@@ -72,17 +73,22 @@ public class UserServiceImpl implements UserService {
 			userExists.setEmail(user.getEmail());
 			userExists.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 			userExists.setActive(user.getActive());
-			
+
 			// atualizando a Role do usuário
 			Role userRole = this.roleRepository.findByName(user.getRoles().iterator().next().getName());
 			userExists.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-			
+
 			this.repository.save(userExists);
 
 			return true;
 		}
 
 		return false;
+	}
+
+	@Override
+	public List<User> findAllWhereRoleEquals(Long role_id) {
+		return this.repository.findAllWhereRoleEquals(role_id);
 	}
 
 	private User findById(Long id) {
