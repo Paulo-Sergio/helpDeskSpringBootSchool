@@ -12,7 +12,7 @@ public interface TicketService {
 	
 	public Ticket create(Ticket ticket);
 	
-	public Model createTemplate(Model model);
+	public Model findAllTechinician(Model model);
 	
 	public Boolean delete(Long id);
 	

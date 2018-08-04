@@ -1,5 +1,6 @@
 package br.com.paulofranca.Helpdesk.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	private UserService userService;
-	
+
 	private final String ROLE_NAME = "ADMIN";
 
 	@Override
@@ -45,12 +46,37 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Boolean delete(Long id) {
-		return null;
+		Ticket ticketExists = this.findById(id);
+
+		if (ticketExists != null) {
+			this.ticketRepository.delete(ticketExists);
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
 	public Boolean update(Long id, Ticket ticket) {
-		return null;
+		Ticket ticketExists = this.findById(id);
+
+		if (ticketExists != null) {
+			ticketExists.setId(ticket.getId());
+			ticketExists.setName(ticket.getName());
+			ticketExists.setDescription(ticket.getDescription());
+			ticketExists.setFinished(ticket.getFinished());
+			ticketExists.setTechnician(ticket.getTechnician());
+
+			if (ticketExists.getFinished()) {
+				ticketExists.setClosed(new Date());
+			}
+
+			this.ticketRepository.save(ticketExists);
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -59,9 +85,7 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public Model createTemplate(Model model) {
-		model.addAttribute("ticket", new Ticket());
-
+	public Model findAllTechinician(Model model) {
 		Role adminRole = this.roleService.findByName(ROLE_NAME);
 
 		model.addAttribute("techs", this.userService.findAllWhereRoleEquals(adminRole.getId(), this.getUserLogged().getId()));
@@ -74,6 +98,10 @@ public class TicketServiceImpl implements TicketService {
 		String userName = auth.getName();
 
 		return this.userRepository.findByEmail(userName);
+	}
+
+	private Ticket findById(Long id) {
+		return this.ticketRepository.findOne(id);
 	}
 
 }
