@@ -28,7 +28,7 @@
 						<span th:case="${false}" class="badge badge-danger" th:text="${ticket.finished}"></span>
 					</td>
 					<td>
-						<a th:href="@{/tickets/{id}(id = ${ticket.id})}" class="btn btn-secondary inline">Ver</a>
+						<a th:href="@{/tickets/{id}(id = ${ticket.id})}" class="btn btn-outline-secondary inline">Ver</a>
 						<a th:href="@{/tickets/edit/{id}(id = ${ticket.id})}" class="btn btn-info inline">Editar</a>
 						<form th:action="@{/tickets/{id}(id = ${ticket.id})}" th:method="delete" class="inline">
 							<button type="submit" class="btn btn-danger">Excluir</button>

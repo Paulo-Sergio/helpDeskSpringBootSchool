@@ -3,32 +3,39 @@
 
 	<th:block layout:fragment="content">
 		<div class="col-xs-12 col-md-12 text-center">
-			<h4>Editar Ticket</h4>
 			
-			<form th:action="@{/tickets/edit/{id}(id = ${ticket.id})}" th:object="${ticket}" th:method="put">
-				<input type="hidden" th:field="*{id}"/>
-				<div class="form-group">
-					<input type="text" th:field="*{name}" name="name" placeholder="Nome do Ticket:" class="form-control" />
-					<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ticket name error</span>
-				</div>	
-				<div class="form-group">
-					<textarea th:field="*{description}" name="description" placeholder="Descrição detalhada do Ticket" class="form-control"></textarea>
-					<span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Ticket details error</span>
-				</div>	
-				<div class="form-group">
-					<select th:field="*{technician}" class="custom-select">
-						<option th:each="tech : ${techs}"
-							    th:value="${tech.id}"
-							    th:text="${tech.name}"
-							    th:selected="${tech.id == ticket.technician.id}">
-						</option>
-					</select>
+			<div class="card">
+				<div class="card-header">
+					<h4>Editar Ticket - <span th:text="${ticket.name}"></span></h4>
 				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-					<a href="/tickets" class="btn btn-default">Voltar</a>
+				<div class="card-body">
+					<form th:action="@{/tickets/edit/{id}(id = ${ticket.id})}" th:object="${ticket}" th:method="put">
+						<input type="hidden" th:field="*{id}"/>
+						<div class="form-group">
+							<input type="text" th:field="*{name}" name="name" placeholder="Nome do Ticket:" class="form-control" />
+							<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ticket name error</span>
+						</div>	
+						<div class="form-group">
+							<textarea th:field="*{description}" name="description" placeholder="Descrição detalhada do Ticket" class="form-control"></textarea>
+							<span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Ticket details error</span>
+						</div>	
+						<div class="form-group">
+							<select th:field="*{technician}" class="custom-select">
+								<option th:each="tech : ${techs}"
+									    th:value="${tech.id}"
+									    th:text="${tech.name}"
+									    th:selected="${tech.id == ticket.technician.id}">
+								</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Salvar</button>
+							<a href="/tickets" class="btn btn-outline-secondary">Voltar</a>
+						</div>
+					</form>
 				</div>
-			</form>
+			</div>
+			
 		</div>
 	</th:block>
 

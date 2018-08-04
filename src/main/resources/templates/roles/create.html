@@ -3,18 +3,25 @@
 
 <th:block layout:fragment="content">
 	<div class="col-xs-12 col-md-12 text-center">
-		<h4>Criar nova função</h4>
 		
-		<form th:action="@{/roles/}" th:object="${role}" th:method="post">
-			<div class="form-group">
-				<input type="text" th:field="*{name}" name="name" placeholder="Nome da Função:" class="form-control" />
-				<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+		<div class="card">
+			<div class="card-header">
+				<h4>Criar nova função</h4>
 			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Salvar</button>
-				<a href="/roles" class="btn btn-default">Voltar</a>
+			<div class="card-body">
+				<form th:action="@{/roles/}" th:object="${role}" th:method="post">
+					<div class="form-group">
+						<input type="text" th:field="*{name}" name="name" placeholder="Nome da Função:" class="form-control" />
+						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a href="/roles" class="btn btn-outline-secondary">Voltar</a>
+					</div>
+				</form>
 			</div>
-		</form>
+		</div>
+		
 	</div>
 </th:block>
 

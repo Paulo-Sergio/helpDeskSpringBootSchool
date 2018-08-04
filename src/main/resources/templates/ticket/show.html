@@ -40,12 +40,14 @@
 						</div>
 					</li>
 				</ul>
+				
+				<a href="/tickets" class="btn btn-block btn-outline-secondary">Voltar</a>
 			</div>
 		</div>	
+		
 		<form action="" th:action="@{/tickets/}" th:object="${ticket}" th:method="post">
 		</form>
 		
-		<a href="/tickets" class="btn btn-default">Voltar</a>
 	</div>
 </th:block>
 	

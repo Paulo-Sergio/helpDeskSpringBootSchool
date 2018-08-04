@@ -3,55 +3,63 @@
 
 <th:block layout:fragment="content">
 	<div class="col-xs-12 col-md-12 text-center">
-		<h4>Editar Usuário</h4>
 		
-		<form th:action="@{/users/edit/{id}(id = ${user.id})}" th:object="${user}" th:method="put">
+		<div class="card">
+			<div class="card-header">
+				<h4>Editar Usuário - <span th:text="${user.name}"></span></h4>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/users/edit/{id}(id = ${user.id})}" th:object="${user}" th:method="put">
+				
+					<input type="hidden" th:field="*{id}" />
+					
+					<div class="row">
+						<div class="form-group col-md-6 col-xs-12">
+							<input type="text" th:field="*{name}" name="name" placeholder="Nome do Usuário:" class="form-control" />
+							<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6 col-xs-12">
+							<input type="text" th:field="*{lastName}" name="lastName" placeholder="Sobrenome do Usuário:" class="form-control" />
+							<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<input type="text" th:field="*{email}" name="email" placeholder="E-mail do Usuário:" class="form-control" />
+						<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+					</div>
+					
+					<div class="form-group">
+						<input type="text" th:field="*{password}" name="password" placeholder="Senha do Usuário:" class="form-control" />
+						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+					</div>
+					
+					<div class="form-group">
+						<select th:field="*{roles}" class="custom-select">
+							<option th:each="role : ${roles}" 
+								th:value="${role.id}" 
+								th:text="${role.name}"
+								th:selected="${role.id == user.roles[0].id}">
+							</option>
+						</select>
+						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+					</div>
+					
+					<div class="form-group">
+						<label class="custom-control custom-checkbox">
+							<input type="checkbox" th:field="*{active}" class="custom-control-input" />
+							<span class="custom-control-label">Ativo?</span>
+						</label>
+					</div>
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a href="/users" class="btn btn-outline-secondary">Voltar</a>
+					</div>
+				</form>
+			</div>
+		</div>
 		
-			<input type="hidden" th:field="*{id}" />
-			
-			<div class="row">
-				<div class="form-group col-md-6 col-xs-12">
-					<input type="text" th:field="*{name}" name="name" placeholder="Nome do Usuário:" class="form-control" />
-					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
-				</div>
-				<div class="form-group col-md-6 col-xs-12">
-					<input type="text" th:field="*{lastName}" name="lastName" placeholder="Sobrenome do Usuário:" class="form-control" />
-					<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></span>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<input type="text" th:field="*{email}" name="email" placeholder="E-mail do Usuário:" class="form-control" />
-				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
-			</div>
-			
-			<div class="form-group">
-				<input type="text" th:field="*{password}" name="password" placeholder="Senha do Usuário:" class="form-control" />
-				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
-			</div>
-			
-			<div class="form-group">
-				<select th:field="*{roles}" class="custom-select">
-					<option th:each="role : ${roles}" 
-						th:value="${role.id}" 
-						th:text="${role.name}"
-						th:selected="${role.id == user.roles[0].id}">
-					</option>
-				</select>
-				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
-			</div>
-			
-			<div class="form-group">
-				<label class="custom-control custom-checkbox">
-					<input type="checkbox" th:field="*{active}" class="custom-control-input" />
-					<span class="custom-control-label">Ativo?</span>
-				</label>
-			</div>
-			
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Salvar</button>
-			</div>
-		</form>
 	</div>
 </th:block>
 
