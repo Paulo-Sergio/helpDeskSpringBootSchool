@@ -17,4 +17,6 @@ public interface UserService {
 	public User show(Long id);
 	
 	public List<User> findAllWhereRoleEquals(Long role_id, Long user_id);
+	
+	public User findCurrentUser();
 }

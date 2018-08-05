@@ -3,6 +3,7 @@ package br.com.paulofranca.Helpdesk.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import br.com.paulofranca.Helpdesk.service.RoleService;
 
 @Controller
 @RequestMapping("/roles")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class RoleController {
 
 	@Autowired

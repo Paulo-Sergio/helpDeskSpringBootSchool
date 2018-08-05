@@ -52,7 +52,7 @@ public class TicketServiceImpl implements TicketService {
 			this.ticketRepository.delete(ticketExists);
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -93,15 +93,14 @@ public class TicketServiceImpl implements TicketService {
 		return model;
 	}
 
+	private Ticket findById(Long id) {
+		return this.ticketRepository.findOne(id);
+	}
+
 	private User getUserLogged() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
 
 		return this.userRepository.findByEmail(userName);
 	}
-
-	private Ticket findById(Long id) {
-		return this.ticketRepository.findOne(id);
-	}
-
 }

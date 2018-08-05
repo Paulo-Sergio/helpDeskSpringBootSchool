@@ -29,10 +29,12 @@
 					</td>
 					<td>
 						<a th:href="@{/tickets/{id}(id = ${ticket.id})}" class="btn btn-outline-secondary inline">Ver</a>
-						<a th:href="@{/tickets/edit/{id}(id = ${ticket.id})}" class="btn btn-info inline">Editar</a>
-						<form th:action="@{/tickets/{id}(id = ${ticket.id})}" th:method="delete" class="inline">
+						<a th:href="@{/tickets/edit/{id}(id = ${ticket.id})}" th:if="${userLoggedIn.id == ticket.userOpen.id}" class="btn btn-info inline">Editar</a>
+						<form th:action="@{/tickets/{id}(id = ${ticket.id})}" th:method="delete" th:if="${userLoggedIn.id == ticket.userOpen.id}" class="inline">
 							<button type="submit" class="btn btn-danger">Excluir</button>
 						</form>
+						<!-- th:if="${userLoggedIn.id == ticket.userOpen.id}" -->
+						<!-- Só vou ter opção de excluir ou alterar se o ticket for meu  -->
 					</td>
 				</tr>
 			</tbody>
