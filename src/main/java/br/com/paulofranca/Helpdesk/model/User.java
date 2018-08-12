@@ -50,14 +50,18 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
-	
+
 	@Column
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userOpen")
 	private Set<Ticket> tickets;
-	
+
 	@Column
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "technician")
 	private Set<Ticket> ticketsTechnician;
+
+	@Column
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userInteraction")
+	private Set<Interaction> interactons;
 
 	public User() {
 	}
