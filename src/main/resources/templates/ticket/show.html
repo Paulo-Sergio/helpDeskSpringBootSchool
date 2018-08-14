@@ -2,6 +2,7 @@
 <html
 	xmlns:th="http://thymeleaf.org/"
 	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout/"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	layout:decorator="layout">
 
 <th:block layout:fragment="content">
@@ -42,12 +43,46 @@
 				</ul>
 				
 				<a href="/tickets" class="btn btn-block btn-outline-secondary">Voltar</a>
+			</div><!-- card-body -->
+		</div><!-- card -->
+	</div><!-- col-xs-12 col-md-12 -->
+	
+	<div class="col-xs-12 col-md-12">
+		<hr />
+		<h2>Nova Interação</h2>
+		
+		<form th:action="@{/tickets/{ticketId}/interactions(ticketId = ${ticket.id})}" th:object="${interaction}" th:method="post">
+			<div class="form-group">
+				<input type="text" disabled="disabled" class="form-control" th:value="${#authentication.name}" />
 			</div>
-		</div>	
-		
-		<form action="" th:action="@{/tickets/}" th:object="${ticket}" th:method="post">
+			<div class="form-group">
+				<textarea class="form-control" th:field="*{text}" placeholder="Escreva o texto da interação"></textarea>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-success">Salvar</button>
+			</div>
 		</form>
-		
+	</div>
+	
+	<div class="col-xs-12 col-md-12">
+		<hr />
+		<h2>Interações</h2>
+		<hr />
+	</div>
+	
+	<div class="col-xs-12 col-md-12" th:each="interact : ${interactions}">
+		<div class="col-xs-10 col-md-10">
+			<strong th:text="${interact.userInteraction.email} + ' comments:'"></strong>
+			<p th:text="${interact.text}"></p>
+		</div>
+		<div class="col-xs-2 col-md-2" th:switch="${userLoggedIn.roles[0].name}">
+			<form th:case="ADMIN" th:action="@{/tickets/{ticketId}/interactions/{id}(ticketId = ${ticket.id}, id = ${interact.id})}" th:method="delete">
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</form>
+			<form th:case="USER" th:if="${userLoggedIn.id == ticket.userOpen.id}" action="" th:action="@{/tickets/{ticketId}/interactions/{id}(ticketId = ${ticket.id}, id = ${interact.id})}" th:method="delete">
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</form>
+		</div>
 	</div>
 </th:block>
 	

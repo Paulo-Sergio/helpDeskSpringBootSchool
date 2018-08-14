@@ -1,5 +1,7 @@
 package br.com.paulofranca.Helpdesk.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.paulofranca.Helpdesk.model.Interaction;
 import br.com.paulofranca.Helpdesk.model.Ticket;
 import br.com.paulofranca.Helpdesk.service.TicketService;
 import br.com.paulofranca.Helpdesk.service.UserService;
@@ -38,7 +41,12 @@ public class TicketController {
 
 	@GetMapping("{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("ticket", this.ticketService.show(id));
+		Ticket ticket = this.ticketService.show(id);
+		List<Interaction> interactions = ticket.getInteractions();
+		
+		model.addAttribute("ticket", ticket);
+		model.addAttribute("interaction", new Interaction());
+		model.addAttribute("interactions", interactions);
 
 		return "ticket/show";
 	}

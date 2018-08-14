@@ -16,22 +16,29 @@ import br.com.paulofranca.Helpdesk.model.Interaction;
 import br.com.paulofranca.Helpdesk.service.InteractionService;
 
 @Controller
-@RequestMapping("/tickets/{tickedId}/interactions")
+@RequestMapping("/tickets/{ticketId}/interactions")
 public class InteractionController {
 
 	@Autowired
 	private InteractionService interactionService;
 
 	@PostMapping
-	public String save(@PathVariable("tickedId") Long tickedId, @Valid @ModelAttribute("interaction") Interaction iteraction,
+	public String save(@PathVariable("ticketId") Long ticketId, @Valid @ModelAttribute("interaction") Interaction interaction,
 			BindingResult bindingResult, Model model) {
 
-		return null;
+		if (bindingResult.hasErrors()) {
+			return "ticket/show";
+		}
+		
+		this.interactionService.create(interaction, ticketId);
+
+		return "redirect:/tickets/" + ticketId;
 	}
 
 	@DeleteMapping("{id}")
-	public String delete(@PathVariable("tickedId") Long tickedId, @PathVariable("id") Long id, Model model) {
-
-		return null;
+	public String delete(@PathVariable("ticketId") Long ticketId, @PathVariable("id") Long id, Model model) {
+		this.interactionService.delete(id, ticketId);
+		
+		return "redirect:/tickets/" + ticketId;
 	}
 }

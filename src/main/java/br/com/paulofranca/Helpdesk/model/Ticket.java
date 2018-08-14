@@ -131,4 +131,12 @@ public class Ticket {
 		this.description = description;
 	}
 
+	public List<Interaction> getInteractions() {
+		return interactions;
+	}
+
+	public void setInteractions(List<Interaction> interactions) {
+		this.interactions = interactions;
+	}
+
 }
