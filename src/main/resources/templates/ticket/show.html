@@ -79,7 +79,7 @@
 			<form th:case="ADMIN" th:action="@{/tickets/{ticketId}/interactions/{id}(ticketId = ${ticket.id}, id = ${interact.id})}" th:method="delete">
 				<button type="submit" class="btn btn-danger">Delete</button>
 			</form>
-			<form th:case="USER" th:if="${userLoggedIn.id == ticket.userOpen.id}" action="" th:action="@{/tickets/{ticketId}/interactions/{id}(ticketId = ${ticket.id}, id = ${interact.id})}" th:method="delete">
+			<form th:case="USER" th:if="${userLoggedIn.id == ticket.userOpen.id}" th:action="@{/tickets/{ticketId}/interactions/{id}(ticketId = ${ticket.id}, id = ${interact.id})}" th:method="delete">
 				<button type="submit" class="btn btn-danger">Delete</button>
 			</form>
 		</div>

@@ -47,6 +47,7 @@ public class TicketController {
 		model.addAttribute("ticket", ticket);
 		model.addAttribute("interaction", new Interaction());
 		model.addAttribute("interactions", interactions);
+		model.addAttribute("userLoggedIn", this.userService.findCurrentUser());
 
 		return "ticket/show";
 	}
