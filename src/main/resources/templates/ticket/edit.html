@@ -28,8 +28,17 @@
 								</option>
 							</select>
 						</div>
+						<div class="form-group" th:if="${interactions_count > 0}">
+							<label class="custom-control custom-checkbox" th:if="${userLoggedIn.id == ticket.userOpen.id or userLoggedIn.roles[0].name == 'ADMIN'}">
+								<input type="checkbox" class="custom-control-input" th:checked="${ticket.finished}" />
+								<span class="custom-control-label">Fechado?</span>
+							</label>					
+						</div>
+						<div class="form-group" th:if="${interactions_count} == 0">
+							<p class="text-danger">Precisa de pelo menos uma interação para fechar este ticket</p>
+						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Salvar</button>
+							<button type="submit" class="btn btn-primary" th:if="${userLoggedIn.id == ticket.userOpen.id or userLoggedIn.roles[0].name == 'ADMIN'}">Salvar</button>
 							<a href="/tickets" class="btn btn-outline-secondary">Voltar</a>
 						</div>
 					</form>
