@@ -92,6 +92,11 @@ public class TicketServiceImpl implements TicketService {
 
 		return model;
 	}
+	
+	@Override
+	public List<Ticket> reportTicketsByDays(Integer day) {
+		return this.ticketRepository.findAllTicketsByDay(day);
+	}
 
 	private Ticket findById(Long id) {
 		return this.ticketRepository.findOne(id);
