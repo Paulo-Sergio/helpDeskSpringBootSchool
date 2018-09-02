@@ -20,5 +20,5 @@ public interface TicketService {
 	
 	public Ticket show(Long id);
 	
-	public List<Ticket> reportTicketsByDays(Integer day);
+	public List<Ticket> reportTicketByDays(Integer day);
 }

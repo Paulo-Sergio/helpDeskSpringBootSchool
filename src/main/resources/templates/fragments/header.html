@@ -15,7 +15,8 @@
 				<li class="nav-item"><a class="nav-link" href="/users" sec:authorize="hasAuthority('ADMIN')">Usuários</a></li>
 				<li class="nav-item"><a class="nav-link" href="/roles" sec:authorize="hasAuthority('ADMIN')">Roles</a></li>
 				<li class="nav-item"><a class="nav-link" href="/tickets">Tickets</a></li>
-				<li class="nav-item"><a class="nav-link" href="/reports" sec:authorize="hasAuthority('ADMIN')">Relatórios</a></li>
+				<li class="nav-item"><a class="nav-link" href="/reports/tickets" sec:authorize="hasAuthority('ADMIN')">Relatórios Html</a></li>
+				<li class="nav-item"><a class="nav-link" href="/reports/tickets/pdfgen" sec:authorize="hasAuthority('ADMIN')">Relatórios PDF</a></li>
 			</ul>
 
 			<ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
